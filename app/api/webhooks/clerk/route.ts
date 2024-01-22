@@ -87,5 +87,20 @@ export async function POST(req: Request) {
     }
   }
 
+  if (eventType === "user.deleted") {
+    try {
+      await db.user.delete({
+        where: {
+          externalUserId: payload.data.id,
+        },
+      });
+    } catch (err) {
+      console.error("Error deleting user:", err);
+      return new Response("Error deleting user", {
+        status: 500,
+      });
+    }
+  }
+
   return new Response("", { status: 200 });
 }
