@@ -68,5 +68,24 @@ export async function POST(req: Request) {
     }
   }
 
+  if (eventType === "user.updated") {
+    try {
+      await db.user.update({
+        where: {
+          externalUserId: payload.data.id,
+        },
+        data: {
+          username: payload.data.username,
+          imageUrl: payload.data.profile_image_url,
+        },
+      });
+    } catch (err) {
+      console.error("Error updating user:", err);
+      return new Response("Error updating user", {
+        status: 500,
+      });
+    }
+  }
+
   return new Response("", { status: 200 });
 }
