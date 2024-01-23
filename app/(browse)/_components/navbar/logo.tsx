@@ -1,7 +1,8 @@
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
 import { Roboto_Condensed } from "next/font/google";
-
 import { cn } from "@/lib/utils";
 
 const font = Roboto_Condensed({
